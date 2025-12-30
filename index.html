@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Inventario de Prendas - Gestión de Ventas y Ganancias</title>
+    <meta name="description"
+        content="Sistema completo para gestionar inventario de prendas, registrar ventas y calcular ganancias en tiempo real">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">👕</div>
+                <h1>Fashion Store</h1>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-item active" data-view="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-item" data-view="inventory">
+                    <span class="nav-icon">📦</span>
+                    <span>Inventario</span>
+                </button>
+                <button class="nav-item" data-view="sales">
+                    <span class="nav-icon">💰</span>
+                    <span>Ventas</span>
+                </button>
+                <button class="nav-item" data-view="profits">
+                    <span class="nav-icon">📈</span>
+                    <span>Ganancias</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard View -->
+            <section id="dashboard-view" class="view active">
+                <header class="view-header">
+                    <h2>Dashboard</h2>
+                    <p class="view-subtitle">Resumen general de tu negocio</p>
+                </header>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">📦
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Total Inventario</p>
+                            <h3 class="stat-value" id="total-inventory">0</h3>
+                            <span class="stat-change positive">+12% este mes</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">💵
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Ventas Totales</p>
+                            <h3 class="stat-value" id="total-sales">$0</h3>
+                            <span class="stat-change positive">+8% este mes</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">📈
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Ganancias Netas</p>
+                            <h3 class="stat-value" id="total-profit">$0</h3>
+                            <span class="stat-change positive">+15% este mes</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">🎯
+                        </div>
+                        <div class="stat-content">
+                            <p class="stat-label">Margen Promedio</p>
+                            <h3 class="stat-value" id="avg-margin">0%</h3>
+                            <span class="stat-change neutral">Sin cambios</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Productos Más Vendidos</h3>
+                        <div id="top-products" class="top-products-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>Ventas Recientes</h3>
+                        <div id="recent-sales" class="recent-sales-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Inventory View -->
+            <section id="inventory-view" class="view">
+                <header class="view-header">
+                    <div>
+                        <h2>Gestión de Inventario</h2>
+                        <p class="view-subtitle">Administra tus prendas y stock</p>
+                    </div>
+                    <button class="btn-primary" id="add-product-btn">
+                        <span>+</span> Agregar Producto
+                    </button>
+                </header>
+
+                <div class="inventory-grid" id="inventory-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+
+            <!-- Sales View -->
+            <section id="sales-view" class="view">
+                <header class="view-header">
+                    <div>
+                        <h2>Registro de Ventas</h2>
+                        <p class="view-subtitle">Registra nuevas ventas de productos</p>
+                    </div>
+                    <button class="btn-primary" id="add-sale-btn">
+                        <span>+</span> Nueva Venta
+                    </button>
+                </header>
+
+                <div class="sales-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unit.</th>
+                                <th>Total</th>
+                                <th>Ganancia</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sales-table-body">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Profits View -->
+            <section id="profits-view" class="view">
+                <header class="view-header">
+                    <h2>Análisis de Ganancias</h2>
+                    <p class="view-subtitle">Desglose detallado de tus ganancias</p>
+                </header>
+
+                <div class="profits-grid">
+                    <div class="profit-card">
+                        <h3>Resumen Financiero</h3>
+                        <div class="profit-summary">
+                            <div class="profit-row">
+                                <span class="profit-label">Ingresos Totales:</span>
+                                <span class="profit-value" id="profit-revenue">$0.00</span>
+                            </div>
+                            <div class="profit-row">
+                                <span class="profit-label">Costos Totales:</span>
+                                <span class="profit-value cost" id="profit-costs">$0.00</span>
+                            </div>
+                            <div class="profit-row total">
+                                <span class="profit-label">Ganancia Neta:</span>
+                                <span class="profit-value" id="profit-net">$0.00</span>
+                            </div>
+                            <div class="profit-row">
+                                <span class="profit-label">Margen de Ganancia:</span>
+                                <span class="profit-value" id="profit-margin">0%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profit-card">
+                        <h3>Ganancias por Categoría</h3>
+                        <div id="category-profits" class="category-profits-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profit-card full-width">
+                    <h3>Productos por Rentabilidad</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Unidades Vendidas</th>
+                                <th>Ingresos</th>
+                                <th>Costos</th>
+                                <th>Ganancia</th>
+                                <th>Margen</th>
+                            </tr>
+                        </thead>
+                        <tbody id="profit-products-table">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+</body>
+
+</html>
