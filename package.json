@@ -1,0 +1,28 @@
+{
+    "name": "shop-leo",
+    "version": "1.0.0",
+    "description": "Sistema de inventario de prendas con Firebase",
+    "main": "index.html",
+    "type": "module",
+    "scripts": {
+        "dev": "firebase serve",
+        "deploy": "firebase deploy",
+        "deploy:hosting": "firebase deploy --only hosting",
+        "deploy:firestore": "firebase deploy --only firestore",
+        "logs": "firebase functions:log"
+    },
+    "keywords": [
+        "inventory",
+        "sales",
+        "firebase",
+        "fashion"
+    ],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "firebase": "^10.7.1"
+    },
+    "devDependencies": {
+        "firebase-tools": "^13.0.0"
+    }
+}

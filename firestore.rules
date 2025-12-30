@@ -1,0 +1,26 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Reglas para la colección de productos
+    match /products/{productId} {
+      // Permitir lectura a todos (modo de prueba)
+      allow read: if true;
+      
+      // Permitir escritura a todos (modo de prueba)
+      // IMPORTANTE: Cambiar estas reglas en producción para requerir autenticación
+      allow write: if true;
+    }
+    
+    // Reglas para la colección de ventas
+    match /sales/{saleId} {
+      // Permitir lectura a todos (modo de prueba)
+      allow read: if true;
+      
+      // Permitir escritura a todos (modo de prueba)
+      // IMPORTANTE: Cambiar estas reglas en producción para requerir autenticación
+      allow write: if true;
+    }
+  }
+}
